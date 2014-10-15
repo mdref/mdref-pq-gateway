@@ -1,4 +1,4 @@
-# class pq\Gateway\Rowset implements SeekableIterator, JsonSerialize, Countable
+# class pq\Gateway\Rowset implements SeekableIterator, JsonSerializable, Countable
 
 The rowset gateway.
 
