@@ -11,7 +11,7 @@ Remember the parameter with any associated type and return $N to be written to t
 
 ## Returns:
 
-* string, '$N', to be used with pq\Query\Writer::write(), where N is tne number of this parameter.
+* string, '$N', to be used with pq\Query\Writer::write(), where N is the number of this parameter.
 
 ## Example:
 

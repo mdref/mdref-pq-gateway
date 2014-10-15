@@ -2,6 +2,10 @@
 
 Write nested AND/OR criteria to the query string.
 
+The criteria can either be a simple accociative array, where the keys build the left hand operand plus the operator and the values make up the right hand operand and will be passed to pq\Query\Writer::param(). All concatenated together by AND clauses.
+
+Using multiple arrays, the above logic will be applied to each array and then concatenated by OR clauses.
+
 ## Params:
 
 * array $criteria  

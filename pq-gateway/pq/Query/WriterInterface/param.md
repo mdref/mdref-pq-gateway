@@ -11,25 +11,4 @@ Remember the parameter with any associated type and return $N to be written to t
 
 ## Returns:
 
-* string, '$N', to be used with pq\Query\WriterInterface::write(), where N is tne number of this parameter.
-
-## Example:
-
-	<?php
-	
-	use pq\Query;
-	
-	$writer = new Query\Writer;
-	$writer->write("SELECT", $writer->param(1));
-	
-	var_dump((string) $writer, $writer->getParams());
-	
-	?>
-
-Yields:
-
-	string(9) "SELECT $1"
-	array(1) {
-	  [0]=>
-	  int(1)
-	}
+* string, '$N', to be used with pq\Query\WriterInterface::write(), where N is the number of this parameter.
