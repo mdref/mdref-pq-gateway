@@ -1,7 +1,7 @@
-# pq\Gateway\Table\Reference pq\Gateway\Table\Relations::getReference(string $table[, string $ref = NULL])
+# pq\Gateway\Table\Reference pq\Gateway\Table::getRelation(string $table[, string $ref = NULL])
 
 Retrieve the foreign key of the table to another table.
-See pq\Gateway\Table::getRelation().
+See pq\Gateway\Table\Relations::getReference().
 
 ## Params:
 
@@ -22,10 +22,9 @@ See pq\Gateway\Table::getRelation().
 	use pq\Gateway\Table;
 	
 	$email = new Table("account_email");
-	$relation = new Table\Relations($email);
-	$account = $relation->getReference("account");
+	$ref = $email->getRelation("account");
 	
-	var_dump($account);
+	var_dump($ref);
 	
 	?>
 

@@ -14,11 +14,10 @@ None.
 
 	<?php
 	
-	echo new pq\Gateway\Table("account",
-		new pq\Connection("application_name='pq-gateway-docs' connect_timeout=10"));
+	echo new pq\Gateway\Table("account");
 	
 	?>
 
 Yields:
 
-	postgresql://mike:@:5432/mike?#account
+	postgresql://mike:@:5432/mike#account

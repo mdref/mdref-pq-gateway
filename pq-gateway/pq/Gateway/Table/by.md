@@ -1,20 +1,15 @@
-# mixed pq\Gateway\Table::by(pq\Gateway\Row $me, string $foreign[, $order = NULL[, int $limit = 0[, int $offset = 0]]])
+# mixed pq\Gateway\Table::by(pq\Gateway\Row $me[, string $ref = NULL])
 
-Find rows in another table by foreign key.
+Find the row inthis table referenced by another table's row by foreign key.
 See pq\Gateway\Table::find(), pq\Gateway\Table::of() and pq\Gateway\Row::ofWhich().
 
 ## Params:
 
-* pq\Gateway\Row $row  
-  A row of this table referenced by another table through a foreign key.
-* Optional string $name = NULL  
+* pq\Gateway\Row $me  
+  A row of another table referenced by this table through a foreign key.
+* Optional string $ref = NULL  
   The identifying name of the relation.
-* Optional string $order = NULL  
-  Sorting clause.
-* Optional int $limit = 0  
-  Row count limit.
-* Optional int $offset = 0  
-  Row count offset.
+
 
 ## Returns:
 
@@ -30,9 +25,32 @@ See pq\Gateway\Table::find(), pq\Gateway\Table::of() and pq\Gateway\Row::ofWhich
 	
 	use pq\Gateway\Table;
 	
-	$account_emails = new Table("account_emails");
+	$accounts = new Table("account");
+	$account_emails = new Table("account_email");
 	$email = $account_emails->find(["email=" => "mike@php.net"])->current();
 	
-	$account = $account_emails->by($email, "account")->current();
+	$account1 = $accounts->by($email)->current();
+	$account2 = $email->ofWhich("account")->current();
+	
+	var_dump($account1->getData(), $account2->getData());
 	
 	?>
+
+Yields:
+
+	array(3) {
+	  ["id"]=>
+	  string(36) "f9710801-c900-4774-848c-22c85deecd83"
+	  ["password"]=>
+	  NULL
+	  ["name"]=>
+	  string(4) "mike"
+	}
+	array(3) {
+	  ["id"]=>
+	  string(36) "f9710801-c900-4774-848c-22c85deecd83"
+	  ["password"]=>
+	  NULL
+	  ["name"]=>
+	  string(4) "mike"
+	}

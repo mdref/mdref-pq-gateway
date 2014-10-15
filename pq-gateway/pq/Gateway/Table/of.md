@@ -1,4 +1,4 @@
-# mixed pq\Gateway\Table::of(pq\Gateway\Row $foreign[, string $name = NULL[, string $order = NULL[, int $limit = 0[, int $offset = 0]]]])
+# mixed pq\Gateway\Table::of(pq\Gateway\Row $foreign[, string $ref = NULL[, string $order = NULL[, int $limit = 0[, int $offset = 0]]]])
 
 Find rows in table by foreign key.
 See pq\Gateway\Table::find(), pq\Gateway\Table::by() and pq\Gateway\Row::allOf().
@@ -7,7 +7,7 @@ See pq\Gateway\Table::find(), pq\Gateway\Table::by() and pq\Gateway\Row::allOf()
 
 * pq\Gateway\Row $row  
   A row of a table referencing this table through a foreign key.
-* Optional string $name = NULL  
+* Optional string $ref = NULL  
   The identifying name of the relation.
 * Optional string $order = NULL  
   Sorting clause.

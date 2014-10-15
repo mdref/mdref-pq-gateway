@@ -8,11 +8,8 @@ See pq\Gateway\Table::by() and pq\Gateway\Table::with().
 The following query is executed by the current executor of the table to retrieve the table references:
 
 	select
-		 case when att1.attname like '%\_'||att2.attname then
-			substring(att1.attname from '^.*(?=_'||att2.attname||'$)')
-		 else
-			att1.attname
-		 end          as "id"
+		regexp_replace(att1.attname, '_'||att2.attname||'$', '')
+					  as "name"
 		,cl1.relname  as "foreignTable"
 		,att1.attname as "foreignColumn"
 		,cl2.relname  as "referencedTable"
@@ -24,16 +21,14 @@ The following query is executed by the current executor of the table to retrieve
 		,pg_attribute  att1
 		,pg_attribute  att2
 	where
-		(	cl1.relname = \$1
-		or	cl2.relname = \$1)
+		 cl1.relname  = \$1
 	and co.confrelid != 0
 	and co.conrelid   = cl1.oid
 	and co.conkey[1]  = att1.attnum and cl1.oid = att1.attrelid
 	and co.confrelid  = cl2.oid
 	and co.confkey[1] = att2.attnum and cl2.oid = att2.attrelid
 	order by 
-		 cl1.relname
-		,att1.attnum
+		att1.attnum
 
 ## Cache:
 
@@ -51,9 +46,8 @@ Relations can be accessed as virtual properties or through pq\Gateway\Table\Rela
 	
 	$relations = new Table\Relations(new Table("account_email"));
 	
-	// $relations->reference->account
-	$account_rel = $relations->getReference("account");
-	$account_rel = $relations->account;
+	var_dump($relations->getReference("account", "account"));
+	var_dump($relations->account["account"]);
 	
 	?>
 

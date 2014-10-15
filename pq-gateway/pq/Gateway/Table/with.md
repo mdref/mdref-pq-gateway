@@ -6,7 +6,7 @@ See pq\Gateway\Table::of(), pq\Gateway\Table::by() and pq\Gateway\Table::find().
 ## Params:
 
 * array $relations  
-  list of stdClass instances representing relations to join for the query; see pq\Gateway\Table::getRelations().
+  list of pq\Gateway\Table\Reference instances representing relations to join for the query; see pq\Gateway\Table::getRelations().
 * Optional array $where = NULL  
   Additional lookup criteria.
 * Optional string $order = NULL  
@@ -35,8 +35,8 @@ See pq\Gateway\Table::of(), pq\Gateway\Table::by() and pq\Gateway\Table::find().
 	$notifications = new Table("notification");
 	
 	$relations = [
-		$emails->getRelations("account")->account_email,
-		$notifications->getRelations("email")->notification
+		$emails->getRelation("account"),
+		$notifications->getRelation("account_email", "email")
 	];
 	
 	$bouncers = $accounts->with($relations, ["bounces>" => 3]);
